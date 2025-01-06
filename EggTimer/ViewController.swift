@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     var player: AVAudioPlayer?
     var timer = Timer()
     var totalTime: Int = 0
-    var secondsPass: Int = 0
+    var secondsPassed: Int = 0
     
 
  
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         totalTime = eggTimes[hardness]!
         
         progressBar.progress = 0.0
-        secondsPass = 0
+        secondsPassed = 0
         ChangeLabel?.text = hardness
 
         timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
@@ -41,12 +41,9 @@ class ViewController: UIViewController {
 
     @objc func updateCounter() {
         //example functionality
-        if secondsPass < totalTime {
-          let percentage = Float(secondsPass)/Float(totalTime)
-            print(percentage)
-            secondsPass += 1
-            progressBar.progress = Float(percentage)
-        
+        if secondsPassed < totalTime {
+            secondsPassed += 1
+            progressBar.progress =  Float(secondsPassed)/Float(totalTime)
         }else{
             timer.invalidate()
             ChangeLabel.text = "done!"
